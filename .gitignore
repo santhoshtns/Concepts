@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/ConceptTests/obj/Debug
+/ConceptTests/bin/Debug
+/Concepts.UnitTest/obj/Debug
+/packages
+/.vs/ConceptTests/v15/Server/sqlite3
+/.vs/Concepts/v15
+/Concepts.UnitTest/bin/Debug
+/.vs
