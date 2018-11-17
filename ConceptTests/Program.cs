@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,7 +27,66 @@ namespace ConceptTests
         }
         static void Main(string[] args)
         {
-            CrashCourse.Tests();
+            var dto = DateTimeOffset.Now;
+            var dto2 = DateTimeOffset.UtcNow;
+
+            NullTest abc1 = null;
+            bool res = abc1?.IsSelected ?? false;
+
+            abc1 = new NullTest() { IsSelected = true };
+            res = abc1?.IsSelected ?? false;
+
+            StringOps.PerformFetchAndReplace();
+            return;
+
+            EmailTemplate o = new EmailTemplate();
+            o.To.Add(new EmailContact() { Name = "ss", Email = "EE" });
+            o.CC.Add(new EmailContact() { Name = "ss", Email = "EE" });
+            o.BCC.Add(new EmailContact() { Name = "ss", Email = "EE" });
+            o.From.Name = "ss";
+            o.From.Email = "EE";
+            var xml = XMLSerialization.GetXml(o);
+
+
+            var values = Enum.GetNames(typeof(roles));
+            foreach (var val in values)
+                Console.WriteLine(val);
+
+            Guid guid;
+            PdfGenerator pdfGenerator = new PdfGenerator();
+            string html = System.IO.File.ReadAllText(@"D:\Work\Samples\ConceptTests\WebConcepts\InvoiceTemp.html");
+            pdfGenerator.Generate(html);
+            return;
+
+
+            NullTest nullTest = null;
+
+            //if ((nullTest?.IsSelected ? true : false))
+            //{
+            //    Console.WriteLine("if (!(categoryBenefitSelection?.Selected ?? false))");
+            //}
+
+            //if (!((nullTest?.IsSelected != null) ? nullTest?.IsSelected : false))
+            //{
+            //    Console.WriteLine("if (!(categoryBenefitSelection?.Selected ?? false))");
+            //}
+
+            LinqTests.TestWhere();
+
+            //check for null
+            DataTable dt = new DataTable();
+            dt.Columns.Add(new DataColumn() { ColumnName = "abc" });
+            var dr = dt.NewRow();
+            dr[0] = null;
+            Console.WriteLine($"dr[0] = {dr[0]}123");
+            var ind = dt.Columns.IndexOf("abc");
+            ind = dt.Columns.IndexOf("");
+
+            object abc = null;
+            Console.WriteLine(dr[0].ToString());
+
+			CrashCourse.Tests();
+
             //const int ab = -1;
             //Console.Write(ab.ToString());
             //List<roles> ls = new List<roles>() { roles.A };
@@ -45,6 +105,21 @@ namespace ConceptTests
             //allLongestStrings(new string[] { "aba", "aa", "ad", "vcd", "aba" });
 
             //commonCharacterCount("aabcc", s2: "adcaa");
+			
+			//xml Serialization
+            var xmlConfig = @"<Package>
+	<ID>52A7B9D2-2F41-40DC-B6CB-6EFDF2196197</ID>
+	<Name>Basic</Name>
+	<Benefits>
+		<Benefit ID=""GTL"" OptionId=""12x"" />
+		<Benefit ID=""GPA"" OptionId=""12x"" />
+		<Benefit ID=""GHS"" OptionId=""Plan01EE"" />
+	</Benefits>
+</Package>";
+            var xmlConfig2 = @"";
+            var package = XMLSerialization.GetPackageObject(xmlConfig);
+            //var benefit = XMLSerialization.GetBenefitObject(Constants.BenefitConfig);
+
         }
 
         static bool isLucky(int n)

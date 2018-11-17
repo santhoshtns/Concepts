@@ -1,5 +1,4 @@
-﻿using System;
-using ConceptTests;
+﻿using ConceptTests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Concepts.UnitTest
